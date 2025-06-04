@@ -1,0 +1,14 @@
+# 仮想環境
+venv/
+
+# Pythonキャッシュ
+__pycache__/
+*.py[cod]
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# 不要なファイル
+inputfile/
+outputfile/
