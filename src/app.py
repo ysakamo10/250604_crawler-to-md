@@ -4,6 +4,26 @@ import requests
 from bs4 import BeautifulSoup
 import html2text
 from typing import List
+from scraping.url_helpers import fetch_url
+
+# サイドバーのタイトル
+st.sidebar.title("メニュー")
+
+# 選択式メニュー
+task = st.sidebar.radio(
+    "タスクを選択", 
+    ["このページの説明", "URL取得", "HTML解析", "マークダウン抽出",]
+)
+
+# # チェックボックスやスライダーも sidebar に置ける
+# enable_diff = st.sidebar.checkbox("差分も表示する")
+# max_items = st.sidebar.slider(
+#     "最大取得件数", min_value=1, max_value=100, value=10
+# )
+
+# メイン画面では選択された task によって処理を分岐
+st.title(f"現在のタスク: {task}")
+
 
 def parse_sitemap(xml_path: str) -> List[str]:
     """
@@ -46,7 +66,7 @@ def fetch_and_convert_to_markdown(url: str, timeout: int = 10) -> str:
 
     return markdown_text
 
-st.title("Difyドキュメント クローラー to Markdown")
+st.title("ドキュメント クローラー to Markdown")
 
 uploaded_file = st.file_uploader("sitemap.xml を選択してください", type="xml")
 prefix = st.text_input("対象 URL のプレフィックス", "https://docs.dify.ai/ja-jp")
